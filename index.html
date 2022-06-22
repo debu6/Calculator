@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <style>
+       form{
+          
+           width:300px;
+           font-size: large;
+
+       }
+       div ul{
+           background-color:lightseagreen;
+           padding: 10px;
+           text-align: left;
+           line-height: 30px;
+           
+       }
+       div ul ul{
+           background-color:lightcoral;
+           margin: 10px;
+           list-style: none;
+       }
+       #demo{
+           width:250px;
+          
+           
+       }
+       #click{
+           width:100px;
+           height:30px;
+           background-color: blueviolet;
+           border-radius: 20px;
+           color: bisque;
+       }
+   </style>
+</head>
+<body style="font-size: 15px;background-color: bisque;">
+    <center>
+        <form name="fn">
+            <label>stock name</label>
+            <input type="text" name="nm"/>
+            <br><br>
+            <label style="margin-left: 40px;">price</label>
+            <input type="number" name="price"/>
+            <br>
+            <input type="radio" name="type" value="true" checked/>buy
+            <input type="radio" name="type" value="false"/>sell
+            <br><input id="click" type="button" value="click" onclick="xyz()"/>
+        </form>
+        <div id="demo" >
+            
+        </div>
+    </center>
+  
+
+<script>
+   var arr=[];
+  
+    function xyz(){
+
+        var name=(document.fn.nm.value);
+        var price=parseFloat(document.fn.price.value)
+        var type=document.fn.type.value;
+        var quantity=Math.round(500/price);
+        var symbol="+"
+        if(type=="true"){
+            var sl=(price-(price*(1.5/100))).toFixed(2)
+            var sl2=(price+(price*(0.5/100))).toFixed(2)
+        var target=(price+(price*(2/100))).toFixed(2)
+        var watch=(price+(price*(1/100))).toFixed(2)
+        var color="lightgreen"
+        
+        }else{
+            var sl=(price+(price*(1.5/100))).toFixed(2)
+            var sl2=(price-(price*(0.5/100))).toFixed(2)
+        var target=(price-(price*(2/100))).toFixed(2)
+        var watch=(price-(price*(1/100))).toFixed(2)
+        var color="lightred"
+        symbol="-"
+        }
+      
+        arr.unshift({name:name,price:price,sl:sl,sl2:sl2,target:target,watch:watch,symbol:symbol,color:color,quantity:quantity});
+        var text=`<ul>`
+     
+     arr.forEach(abc)
+      function abc(value){
+              
+              text+=`<ul style="background-color:${value.color}">
+                          <li style=" text-align: center;"><u>${value.name}</u></li>
+                          <li>Entry ₹ ${value.price}</li>
+                          <li>SL1   ₹  ${value.sl}</li>
+                          <li>SL2   ₹  ${value.sl2}</li>
+                          <li style="background-color:yellow">${value.symbol}1%  ₹  ${value.watch}</li>
+                          <li>target  ₹  ${value.target}</li>
+                          <li>quantity   ${value.quantity}</li>
+                          
+                      </ul>`
+      }
+      text+=`</ul>`
+      
+ document.getElementById("demo").innerHTML=text
+    }
+  
+  
+  
+</script>
+</body>
+</body>
+</html>
